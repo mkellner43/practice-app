@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
   <div class="container-fluid">
     <%= link_to "Navbar", root_path, class: "navbar-brand"%>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,14 +23,29 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <% unless Current.user %>
+          <li class='nav-item'>
+            <%= link_to 'Sign Up', sign_up_path, data: { "turbo": false }, class: 'nav-link' %>
+          </li>
+          <li class='nav-item'>
+            <%= link_to 'Log In', sign_in_path, data: { "turbo": false }, class: 'nav-link me-2' %>
+          </li>
+        <% end %>
+        <% if Current.user %>
+          <li class="nav-item">
+            <%= link_to Current.user.email, edit_password_path, data: { "turbo-method": :update }, class: 'nav-link ms-2 me-2' %>
+          </li>
+        <li class="nav-item">
+          <%= link_to "Logout", logout_path, data: { "turbo-method": :delete }, class: 'nav-link btn btn-outline-secondary ms-2 me-2' %>
+        </li>
+        <% end %>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-secondary" type="submit">Search</button>
+        </form>
+      </ul>
     </div>
   </div>
 </nav>

@@ -1,3 +1,7 @@
-<div class="d-flex align-items-center justify-content-center">
-  <h1>This is my app</h1>
+<div class="container">
+  <div class="d-flex justify-content-center p-2">
+    <h1>This is my app</h1><br>
+  </div>
 </div>
+
+<%= link_to "Connect Twitter", "/auth/twitter", data: { "turbo-method": :post }, class: "btn btn-primary" %>
